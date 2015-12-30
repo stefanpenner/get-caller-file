@@ -1,6 +1,6 @@
 'use strict';
 
-var getCallerFile = require('.');
+var getCallerFile = require('./');
 var expect = require('chai').expect;
 var foo = require('./fixtures/foo');
 var bar = require('./fixtures/bar');
