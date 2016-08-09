@@ -6,6 +6,9 @@
   "directories": {
     "test": "tests"
   },
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "mocha test",
     "test:debug": "mocha test"
