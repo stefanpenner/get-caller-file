@@ -18,4 +18,13 @@ describe('getCallerFile', function() {
   it('gets another file, as it is the caller', function() {
     expect(ensurePosix(bar())).to.eql(ensurePosix(__dirname + '/fixtures/bar.js'));
   });
+
+  xit('throws error if error stackTraceLimit overflow', () => {
+    expect(getCallerFile(12)).to.throw(Error);
+  });
+
+  xit('throws no errors if incrementing error stackTraceLimit ', () => {
+    Error.stackTraceLimit = 14;
+    expect(getCallerFile(12)).to.not.throw(Error);
+  });
 });
