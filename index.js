@@ -6,6 +6,14 @@
 // Inspired by http://stackoverflow.com/questions/13227489
 
 module.exports = function getCallerFile(_position) {
+
+  const stackTraceLimit = Error.stackTraceLimit-1;
+  const errorMessage=`ErrorStackTraceLimit overflow. Can pass less then ${stackTraceLimit} or increase property Error.stackTraceLimit`;
+
+  if(_position > stackTraceLimit){
+    throw errorMessage;
+  }
+  
   var oldPrepareStackTrace = Error.prepareStackTrace;
   Error.prepareStackTrace = function(err, stack) { return stack; };
   var stack = new Error().stack;
