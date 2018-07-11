@@ -6,12 +6,17 @@
 // Inspired by http://stackoverflow.com/questions/13227489
 
 module.exports = function getCallerFile(_position) {
+  var position = _position ? _position : 2;
+
+  if (position >= Error.stackTraceLimit) {
+    throw new TypeError('getCallerFile(position) requires position be less then Error.stackTraceLimit but position was: `' + position + '` and Error.stackTraceLimit was: `' + Error.stackTraceLimit + '`');
+  }
+
   var oldPrepareStackTrace = Error.prepareStackTrace;
   Error.prepareStackTrace = function(err, stack) { return stack; };
   var stack = new Error().stack;
   Error.prepareStackTrace = oldPrepareStackTrace;
 
-  var position = _position ? _position : 2;
 
   // stack[0] holds this file
   // stack[1] holds where this function was called
