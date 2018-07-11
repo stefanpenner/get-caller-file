@@ -1,13 +1,13 @@
 'use strict';
 
-var getCallerFile = require('./');
-var expect = require('chai').expect;
-var foo = require('./fixtures/foo');
-var bar = require('./fixtures/bar');
-var ensurePosix = require('ensure-posix-path');
+const getCallerFile = require('./');
+const expect = require('chai').expect;
+const foo = require('./fixtures/foo');
+const bar = require('./fixtures/bar');
+const ensurePosix = require('ensure-posix-path');
 
 describe('getCallerFile', function() {
-  var originalStackTraceLimit = Error.stackTraceLimit;
+  const originalStackTraceLimit = Error.stackTraceLimit;
 
   afterEach(() => Error.stackTraceLimit = originalStackTraceLimit);
 
