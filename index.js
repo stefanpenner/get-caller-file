@@ -6,12 +6,10 @@
 // Inspired by http://stackoverflow.com/questions/13227489
 
 module.exports = function getCallerFile(_position) {
+  var position = _position ? _position : 2;
 
-  var stackTraceLimit = Error.stackTraceLimit-1;
-  var errorMessage='ErrorStackTraceLimit overflow. Can pass less then ' + stackTraceLimit + ' or increase property Error.stackTraceLimit';
-
-  if(_position > stackTraceLimit){
-    throw errorMessage;
+  if (position >= Error.stackTraceLimit) {
+    throw new TypeError('getCallerFile(position) requires position be less then Error.stackTraceLimit but position was: `' + position + '` and Error.stackTraceLimit was: `' + Error.stackTraceLimit + '`');
   }
 
   var oldPrepareStackTrace = Error.prepareStackTrace;
@@ -19,7 +17,6 @@ module.exports = function getCallerFile(_position) {
   var stack = new Error().stack;
   Error.prepareStackTrace = oldPrepareStackTrace;
 
-  var position = _position ? _position : 2;
 
   // stack[0] holds this file
   // stack[1] holds where this function was called

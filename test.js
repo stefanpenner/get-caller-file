@@ -7,6 +7,10 @@ var bar = require('./fixtures/bar');
 var ensurePosix = require('ensure-posix-path');
 
 describe('getCallerFile', function() {
+  var originalStackTraceLimit = Error.stackTraceLimit;
+
+  afterEach(() => Error.stackTraceLimit = originalStackTraceLimit);
+
   it('gets current caller file', function() {
     expect(ensurePosix(getCallerFile())).to.eql(ensurePosix(__dirname + '/node_modules/mocha/lib/runnable.js'));
   });
@@ -19,12 +23,14 @@ describe('getCallerFile', function() {
     expect(ensurePosix(bar())).to.eql(ensurePosix(__dirname + '/fixtures/bar.js'));
   });
 
-  xit('throws error if error stackTraceLimit overflow', function(){
-    expect(getCallerFile(12)).to.throw(Error);
+
+  it('throws error if error stackTraceLimit overflow', function() {
+    Error.stackTraceLimit = 5;
+    expect(() => getCallerFile(Error.stackTraceLimit + 1)).to.throw(TypeError);
   });
 
-  xit('throws no errors if incrementing error stackTraceLimit ', function(){
-    Error.stackTraceLimit = 14;
-    expect(getCallerFile(12)).to.not.throw(Error);
+  it('throws no errors if incrementing error stackTraceLimit ', function() {
+    Error.stackTraceLimit = 5;
+    expect(() => getCallerFile(Error.stackTraceLimit - 1)).to.not.throw(TypeError);
   });
 });
