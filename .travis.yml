@@ -4,6 +4,10 @@ node_js:
   - "6"
   - "8"
   - "10"
+  - "11"
+
+cache:
+  yarn: true
 
 script: npm test
 before_install:
