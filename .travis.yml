@@ -4,10 +4,12 @@ node_js:
   - "6"
   - "8"
   - "10"
-  - "10"
+  - "11"
 
 cache:
   yarn: true
+
+script: yarn test
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
