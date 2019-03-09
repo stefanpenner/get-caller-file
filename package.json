@@ -30,6 +30,7 @@
     "@types/chai": "^4.1.7",
     "@types/ensure-posix-path": "^1.0.0",
     "@types/mocha": "^5.2.6",
+    "@types/node": "^11.10.5",
     "chai": "^4.1.2",
     "ensure-posix-path": "^1.0.1",
     "mocha": "^5.2.0",
@@ -37,8 +38,5 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
-  },
-  "dependencies": {
-    "@types/node": "^11.10.5"
   }
 }
